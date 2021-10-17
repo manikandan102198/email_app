@@ -16,8 +16,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    BlocProvider.of<GetUserListCubit>(context).getUsersEmail();
+    getUserEmail();
     super.initState();
+  }
+
+  void getUserEmail() {
+    BlocProvider.of<GetUserListCubit>(context).getUsersEmail();
   }
 
   @override
@@ -36,10 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
               if (state is GetUserListFailure) {
                 return Align(
                   alignment: Alignment.center,
-                  child: Text(
-                    '${state.appErrorType}',
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 22, color: Colors.black),
+                  child: InkWell(
+                    onTap: () => getUserEmail(),
+                    child: Text(
+                      '${state.appErrorType}',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 22, color: Colors.black),
+                    ),
                   ),
                 );
               }

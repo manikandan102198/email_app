@@ -14,10 +14,17 @@ class EmailApp extends StatefulWidget {
 class _EmailAppState extends State<EmailApp> {
   late GetUserListCubit getUserListCubit;
   final _appRouter = AppRouter();
+
   @override
   void initState() {
     super.initState();
     getUserListCubit = getInstance<GetUserListCubit>();
+  }
+
+  @override
+  void dispose() {
+    getUserListCubit.close();
+    super.dispose();
   }
 
   @override
